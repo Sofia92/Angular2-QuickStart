@@ -1,1 +1,1 @@
-{"version":3,"file":"hero.js","sourceRoot":"","sources":["hero.ts"],"names":[],"mappings":";;;;;;;YAAA;gBACC,cAAoB,EAAU,EAAS,IAAY;oBAA/B,OAAE,GAAF,EAAE,CAAQ;oBAAS,SAAI,GAAJ,IAAI,CAAQ;gBAAE,CAAC;gBACvD,WAAC;YAAD,CAAC,AAFD,IAEC;YAFD,uBAEC,CAAA"}
+{"version":3,"file":"hero.js","sourceRoot":"","sources":["hero.ts"],"names":[],"mappings":";;;;;;;YAAA;gBACC,cACQ,EAAU,EACV,IAAY,EACZ,KAAY;oBAFZ,OAAE,GAAF,EAAE,CAAQ;oBACV,SAAI,GAAJ,IAAI,CAAQ;oBACZ,UAAK,GAAL,KAAK,CAAO;gBACjB,CAAC;gBACL,WAAC;YAAD,CAAC,AAND,IAMC;YAND,uBAMC,CAAA"}

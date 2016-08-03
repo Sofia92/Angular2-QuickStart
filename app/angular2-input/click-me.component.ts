@@ -1,49 +1,51 @@
-import { Component } from 'angular2/core';
+import { Component, OnInit } from 'angular2/core';
+import { Hero } from './../hero';
+import { HeroService } from './../angular2-service/hero.service';
 
 @Component({
 	selector:'click-me',
+  	providers: [HeroService],
 	template:`
-		<button type="button" class="btn btn-default" (click)="onClick()">click me !</button>
-		{{clickMessage}}
-		<p>
+		<div>
 			$event
 			<input (keyup)="onKey($event)">
   			{{values}}
-		</p>
-		<p>
 			#box
-			<input #box (keyup)="onKeyUp(box.value)">
+			<input #boxValue (keyup)="onKeyUp(boxValue.value)">
   			{{value}}
-		</p>
-		<p>
 			keyup.enter
-			<input #box (keyup.enter)="onKeyUpEnter(box.value)">
+			<input #enterBox (keyup.enter)="onKeyUpEnter(enterBox.value)">
   			{{enterValue}}
-		</p>
-		<p>
 			blur
 			<input #box (keyup.enter)="blurValue=box.value" (blur)="blurValue=box.value">
   			{{blurValue}}
-		</p>
+		<button type="button" class="btn btn-default" (click)="onClick()">click me !</button>
+		{{clickMessage}}
+		</div>
 		<div>
 			<h2>Little Tour of Heroes</h2>
 			<input #newHero (keyup.enter)="add(newHero.value)" (blur)="add(newHero.value); newHero.value=''" >
 			<button (click)="add(newHero.value)">Add</button>
 			<ul>
-				<li *ngFor="# hero of heroes">{{ hero }}</li>
+				<li *ngFor="# hero of heroList">{{ hero }}</li>
 			</ul>
 		</div>
 	`
 })
 
-export class clickMeComponent {
+export class clickMeComponent implements OnInit{
 	clickMessage = '';
 	values = '';
 	value = '';
 	enterValue = '';
 	blurValue = '';
 	newHero = ''
-	heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
+	heroes:Hero[] =[]; 
+	heroList = [];
+	constructor(private heroService:HeroService){ }
+	ngOnInit(){
+	    this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+	};
 
 	onClick() {
 		this.clickMessage = '你好！';
@@ -66,7 +68,7 @@ export class clickMeComponent {
   	}
   	add(newHero:string){
   		if(newHero){
-  			this.heroes.push(newHero);
+  			this.heroList.push(newHero);
   		}
   	}
 

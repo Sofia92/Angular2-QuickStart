@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', './../angular2-service/hero.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,24 +10,34 @@ System.register(['angular2/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, hero_service_1;
     var clickMeComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (hero_service_1_1) {
+                hero_service_1 = hero_service_1_1;
             }],
         execute: function() {
             clickMeComponent = (function () {
-                function clickMeComponent() {
+                function clickMeComponent(heroService) {
+                    this.heroService = heroService;
                     this.clickMessage = '';
                     this.values = '';
                     this.value = '';
                     this.enterValue = '';
                     this.blurValue = '';
                     this.newHero = '';
-                    this.heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
+                    this.heroes = [];
+                    this.heroList = [];
                 }
+                clickMeComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this.heroService.getHeroes().then(function (heroes) { return _this.heroes = heroes; });
+                };
+                ;
                 clickMeComponent.prototype.onClick = function () {
                     this.clickMessage = '你好！';
                 };
@@ -45,15 +55,16 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 };
                 clickMeComponent.prototype.add = function (newHero) {
                     if (newHero) {
-                        this.heroes.push(newHero);
+                        this.heroList.push(newHero);
                     }
                 };
                 clickMeComponent = __decorate([
                     core_1.Component({
                         selector: 'click-me',
-                        template: "\n\t\t<button type=\"button\" class=\"btn btn-default\" (click)=\"onClick()\">click me !</button>\n\t\t{{clickMessage}}\n\t\t<p>\n\t\t\t$event\n\t\t\t<input (keyup)=\"onKey($event)\">\n  \t\t\t{{values}}\n\t\t</p>\n\t\t<p>\n\t\t\t#box\n\t\t\t<input #box (keyup)=\"onKeyUp(box.value)\">\n  \t\t\t{{value}}\n\t\t</p>\n\t\t<p>\n\t\t\tkeyup.enter\n\t\t\t<input #box (keyup.enter)=\"onKeyUpEnter(box.value)\">\n  \t\t\t{{enterValue}}\n\t\t</p>\n\t\t<p>\n\t\t\tblur\n\t\t\t<input #box (keyup.enter)=\"blurValue=box.value\" (blur)=\"blurValue=box.value\">\n  \t\t\t{{blurValue}}\n\t\t</p>\n\t\t<div>\n\t\t\t<h2>Little Tour of Heroes</h2>\n\t\t\t<input #newHero (keyup.enter)=\"add(newHero.value)\" (blur)=\"add(newHero.value); newHero.value=''\" >\n\t\t\t<button (click)=\"add(newHero.value)\">Add</button>\n\t\t\t<ul>\n\t\t\t\t<li *ngFor=\"# hero of heroes\">{{ hero }}</li>\n\t\t\t</ul>\n\t\t</div>\n\t"
+                        providers: [hero_service_1.HeroService],
+                        template: "\n\t\t<div>\n\t\t\t$event\n\t\t\t<input (keyup)=\"onKey($event)\">\n  \t\t\t{{values}}\n\t\t\t#box\n\t\t\t<input #boxValue (keyup)=\"onKeyUp(boxValue.value)\">\n  \t\t\t{{value}}\n\t\t\tkeyup.enter\n\t\t\t<input #enterBox (keyup.enter)=\"onKeyUpEnter(enterBox.value)\">\n  \t\t\t{{enterValue}}\n\t\t\tblur\n\t\t\t<input #box (keyup.enter)=\"blurValue=box.value\" (blur)=\"blurValue=box.value\">\n  \t\t\t{{blurValue}}\n\t\t<button type=\"button\" class=\"btn btn-default\" (click)=\"onClick()\">click me !</button>\n\t\t{{clickMessage}}\n\t\t</div>\n\t\t<div>\n\t\t\t<h2>Little Tour of Heroes</h2>\n\t\t\t<input #newHero (keyup.enter)=\"add(newHero.value)\" (blur)=\"add(newHero.value); newHero.value=''\" >\n\t\t\t<button (click)=\"add(newHero.value)\">Add</button>\n\t\t\t<ul>\n\t\t\t\t<li *ngFor=\"# hero of heroList\">{{ hero }}</li>\n\t\t\t</ul>\n\t\t</div>\n\t"
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [hero_service_1.HeroService])
                 ], clickMeComponent);
                 return clickMeComponent;
             }());

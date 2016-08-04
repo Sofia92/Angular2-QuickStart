@@ -1,39 +1,41 @@
 import { Component, OnInit } from 'angular2/core';
 import { Hero } from './../hero';
-import { HeroService } from './../angular2-service/hero.service';
 
 @Component({
 	selector:'click-me',
-  	providers: [HeroService],
 	template:`
-		<div>
-			$event
+		<div class="col-sm-8 col-sm-offset-2">
+		<p>$event
 			<input (keyup)="onKey($event)">
   			{{values}}
-			#box
+		</p>
+		<p>#box
 			<input #boxValue (keyup)="onKeyUp(boxValue.value)">
   			{{value}}
-			keyup.enter
+		</p>
+		<p>keyup.enter
 			<input #enterBox (keyup.enter)="onKeyUpEnter(enterBox.value)">
   			{{enterValue}}
-			blur
+		</p>
+		<p>blur
 			<input #box (keyup.enter)="blurValue=box.value" (blur)="blurValue=box.value">
   			{{blurValue}}
+		</p>
 		<button type="button" class="btn btn-default" (click)="onClick()">click me !</button>
 		{{clickMessage}}
-		</div>
 		<div>
 			<h2>Little Tour of Heroes</h2>
 			<input #newHero (keyup.enter)="add(newHero.value)" (blur)="add(newHero.value); newHero.value=''" >
 			<button (click)="add(newHero.value)">Add</button>
 			<ul>
-				<li *ngFor="# hero of heroList">{{ hero }}</li>
+				<li *ngFor="# list of heroList">{{ list }}</li>
 			</ul>
+		</div>
 		</div>
 	`
 })
 
-export class clickMeComponent implements OnInit{
+export class clickMeComponent {
 	clickMessage = '';
 	values = '';
 	value = '';
@@ -41,12 +43,7 @@ export class clickMeComponent implements OnInit{
 	blurValue = '';
 	newHero = ''
 	heroes:Hero[] =[]; 
-	heroList = [];
-	constructor(private heroService:HeroService){ }
-	ngOnInit(){
-	    this.heroService.getHeroes().then(heroes => this.heroes = heroes);
-	};
-
+	heroList = ['Jonas','Demi','Vantis','Sofia'];
 	onClick() {
 		this.clickMessage = '你好！';
 	}

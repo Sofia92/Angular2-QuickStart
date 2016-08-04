@@ -23,23 +23,28 @@ System.register(['angular2/core', '../hero'], function(exports_1, context_1) {
         execute: function() {
             HeroFormComponent = (function () {
                 function HeroFormComponent() {
-                    this.powers = ['Really Smart', 'Super Flexible',
-                        'Super Hot', 'Weather Changer'];
+                    this.powers = ['Really Smart', 'Super Flexible', 'Super Hot', 'Weather Changer'];
                     this.model = new hero_1.Hero(18, 'Dr IQ', this.powers[0]);
                     this.submitted = false;
+                    this.active = true;
                 }
-                HeroFormComponent.prototype.onsubmit = function () {
-                    this.submitted = true;
-                };
+                HeroFormComponent.prototype.onsubmit = function () { this.submitted = true; };
                 Object.defineProperty(HeroFormComponent.prototype, "diagnostic", {
                     get: function () { return JSON.stringify(this.model); },
                     enumerable: true,
                     configurable: true
                 });
+                HeroFormComponent.prototype.newHero = function () {
+                    var _this = this;
+                    this.model = new hero_1.Hero(42, '', '');
+                    this.active = false;
+                    setTimeout(function () { return _this.active = true; }, 0);
+                };
                 HeroFormComponent = __decorate([
                     core_1.Component({
                         selector: 'hero-form',
-                        templateUrl: 'app/angular2-forms/hero-form.component.html'
+                        templateUrl: 'app/angular2-forms/hero-form.component.html',
+                        styleUrls: ['app/angular2-forms/forms.css']
                     }), 
                     __metadata('design:paramtypes', [])
                 ], HeroFormComponent);

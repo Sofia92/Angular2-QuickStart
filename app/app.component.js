@@ -43,7 +43,7 @@ System.register(['angular2/core', 'angular2/router', './angular2-service/hero.se
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n  <h1>{{title}}</h1>\n  <nav>\n    <a [routerLink]=\"['Input']\">Input</a>\n    <a [routerLink]=\"['Forms']\">Forms</a>\n  </nav>\n  <p>Heroes:</p>\n    <ul>\n      <li *ngFor=\"# hero of heroes\">\n        {{ hero.name }}\n      </li>\n    </ul>\n  <p>\n  <router-outlet></router-outlet>\n",
+                        template: "\n    <div class=\"col-sm-6 col-sm-offset-1\">\n  <h1>{{title}}</h1>\n  <nav>\n    <a [routerLink]=\"['Input']\">Input</a>\n    <a [routerLink]=\"['Forms']\">Forms</a>\n  </nav>\n  <router-outlet></router-outlet>\n  </div>\n",
                         // styleUrls: ['app/app.component.css'],
                         directives: [router_1.ROUTER_DIRECTIVES, click_me_component_1.clickMeComponent, hero_form_component_1.HeroFormComponent],
                         providers: [router_1.ROUTER_PROVIDERS, hero_service_1.HeroService]

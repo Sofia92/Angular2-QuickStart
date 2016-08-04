@@ -8,19 +8,14 @@ import { HeroFormComponent } from './angular2-forms/hero-form.component';
 @Component({
     selector: 'my-app',
     template: `
+    <div class="col-sm-6 col-sm-offset-1">
   <h1>{{title}}</h1>
   <nav>
     <a [routerLink]="['Input']">Input</a>
     <a [routerLink]="['Forms']">Forms</a>
   </nav>
-  <p>Heroes:</p>
-    <ul>
-      <li *ngFor="# hero of heroes">
-        {{ hero.name }}
-      </li>
-    </ul>
-  <p>
   <router-outlet></router-outlet>
+  </div>
 `,
   // styleUrls: ['app/app.component.css'],
   directives: [ROUTER_DIRECTIVES,clickMeComponent,HeroFormComponent],
